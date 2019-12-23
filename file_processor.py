@@ -1,9 +1,10 @@
-from pathlib import Path
+import os
 
 class ProcessPlugin:
-	def __init__(self, path, substrings):
-		self.path = path
-		self.substrings = substrings
+	def __init__(self, config):
+		self.config = config
+		self.path = self.config.files_path
+		self.substrings = self.configs.substrings
 
 		if not len(self.substrings):
 			print("No search substrings were given. Exiting.")
@@ -16,8 +17,8 @@ class ProcessPlugin:
 
 	def check_path(self):
 		""" Checks whether given path is valid. """
-		if not Path(self.path).is_file():
-			print(f"Given file path \"{self.path}\" does not exist.")
+		if not os.path.exists(self.path):
+			print(f"Given path \"{self.path}\" does not exist.")
 
 			quit()
 
@@ -61,4 +62,3 @@ class ProcessPlugin:
 
 			for line in self.occurences[substring]:
 				print(f"Line {line}")
-

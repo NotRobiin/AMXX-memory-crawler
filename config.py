@@ -14,5 +14,6 @@ class Config:
 		}
 
 		self.plugins_directory = "CS_1.6/cstrike/addons/amxmodx/plugins"
-
 		self.plugins_download_path = "c:/users/robertt/desktop/files/amxx"
+
+		self.uncompresser_path = "C:/users/robertt/desktop/programming/decompilers/AMXX_UNCOMPRESS/amxx_uncompress.exe"

@@ -6,4 +6,5 @@ if __name__ == "__main__":
 	config = Config()
 
 	plugin_downloader = DownloadPlugins(config)
-	#plugin_processor = ProcessPlugin(config.files_path, config.substrings)
+	plugin_converter = CovertPlugins(config)
+	plugin_processor = ProcessPlugin(config)
