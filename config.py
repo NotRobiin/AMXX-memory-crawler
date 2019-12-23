@@ -6,3 +6,11 @@ class Config:
 			"set_user_flags",
 			"get_user_flags"
 		]
+
+		self.ftp = {
+			"host" : "w69.1shot1kill.pl",
+			"user" : "srv61295",
+			"pass" : "NuKAw27HwF"
+		}
+
+		self.plugins_directory = "CS_1.6/cstrike/addons/amxmodx/plugins"
