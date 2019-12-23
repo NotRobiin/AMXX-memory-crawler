@@ -28,11 +28,24 @@ class ProcessPlugin:
 
         self.occurences = {}
         line_number = 0
-        files = [file for file in os.listdir(self.path) if os.path.isfile(os.path.join(self.path, file))]
+        files = []
+
+        # Add proper files to list
+        for file in os.listdir(self.path):
+            if not os.path.isfile(os.path.join(self.path, file)):
+                continue
+
+            for extension in self.config.file_types:
+                if not extension in file:
+                    continue
+
+                files.append(file)
+                
+                break
 
         # Open file
         for file_name in files:
-            full_path = self.config.files_path + file_name
+            full_path = self.path + file_name
 
             with open(full_path) as file:
                 # Read it line by line

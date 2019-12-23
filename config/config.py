@@ -6,6 +6,10 @@ class Config:
 			"set_user_flags",
 			"get_user_flags"
 		]
+		self.file_types = [
+			".memory",
+			".txt"
+		]
 
 		self.ftp = {
 			"host" : "w69.1shot1kill.pl",
