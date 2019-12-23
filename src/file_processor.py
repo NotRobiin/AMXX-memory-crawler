@@ -23,25 +23,26 @@ class ProcessPlugin:
         """ Processes given file by looking for substrings. """
         self.occurences = {}
         line_number = 0
-        files = []
+        directory_files = []
+        found_data = []
 
         print("------ Processing ------")
 
-        # Add proper files to list
-        for file in os.listdir(self.path):
-            if not os.path.isfile(os.path.join(self.path, file)):
+        # Gather names of files in given directory
+        for file_name in os.listdir(self.path):
+            if not os.path.isfile(os.path.join(self.path, file_name)):
                 continue
 
             for extension in self.config.file_types:
-                if not extension in file:
+                if not extension in file_name:
                     continue
 
-                files.append(file)
+                directory_files.append(file_name)
                 
                 break
 
         # Open file
-        for file_name in files:
+        for file_name in directory_files:
             full_path = self.path + file_name
 
             with open(full_path) as file:
@@ -54,18 +55,18 @@ class ProcessPlugin:
                         continue
 
                     # Look for every substring in the line
-                    for substring in self.substrings:
-                        if not substring in line:
+                    for search_key in self.substrings:
+                        if not search_key in line:
                             continue
 
                         try:
-                            found_data = self.occurences[substring]
-                            found_data.append([line_number, file_name])
-
-                            self.occurences[substring] = found_data
+                            found_data = self.occurences[search_key]
+                            found_data.append((line_number, file_name))
 
                         except KeyError:
-                            self.occurences[substring] = [(line_number, file_name)]
+                            found_data = [(line_number, file_name)]
+
+                        self.occurences[search_key] = found_data
 
         print("Processed successfully\n")
 
