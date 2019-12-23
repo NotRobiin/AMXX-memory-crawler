@@ -21,12 +21,12 @@ class ProcessPlugin:
 
     def process(self):
         """ Processes given file by looking for substrings. """
+        print("------ Processing ------")
+
         self.occurences = {}
         line_number = 0
         directory_files = []
         found_data = []
-
-        print("------ Processing ------")
 
         # Gather names of files in given directory
         for file_name in os.listdir(self.path):
