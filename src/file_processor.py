@@ -1,6 +1,6 @@
 import os
 
-class ProcessPlugin:
+class ProcessPlugins:
     def __init__(self, config):
         self.config = config
         self.path = self.config.files_path
