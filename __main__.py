@@ -8,4 +8,4 @@ if __name__ == "__main__":
 
 	plugin_downloader = DownloadPlugins(config)
 	plugin_converter = ConvertPlugins(config)
-	plugin_processor = ProcessPlugin(config)
+	#plugin_processor = ProcessPlugin(config)

@@ -12,11 +12,11 @@ class DownloadPlugins:
 
 		self.connect()
 		self.server.cwd(self.config.plugins_directory)
-		self.server.retrlines("LIST")
 		self.download()
 
 	def connect(self):
 		""" Connects to FTP """
+		print("------ Connecting ------")
 		print(f"Connecting to server:\
 				\n\tHost: {self.host}\
 				\n\tUser: {self.user}\
@@ -55,7 +55,7 @@ class DownloadPlugins:
 
 		for name in file_names:
 			with open(name, "wb") as file:
-				self.server.retrbinary(f"RETR {name}", file.write)
+				#self.server.retrbinary(f"RETR {name}", file.write)
 
 				file.close()
 

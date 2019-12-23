@@ -4,7 +4,7 @@ class ProcessPlugin:
 	def __init__(self, config):
 		self.config = config
 		self.path = self.config.files_path
-		self.substrings = self.configs.substrings
+		self.substrings = self.config.substrings
 
 		if not len(self.substrings):
 			print("No search substrings were given. Exiting.")
@@ -24,6 +24,8 @@ class ProcessPlugin:
 
 	def process(self):
 		""" Processes given file by looking for substrings. """
+		print("------ Processing ------")
+
 		self.occurences = {}
 		line_number = 0
 
