@@ -1,5 +1,6 @@
-from ftplib import FTP
+import ftplib as ftp
 import os
+import time
 
 class DownloadPlugins:
     def __init__(self, config):
@@ -20,24 +21,34 @@ class DownloadPlugins:
 
         self.connected = False
 
+        # Try connecting
         try:
-            self.server = FTP(self.host, user = self.user, passwd = self.password)
+            self.server = ftp.FTP(self.host, user = self.user, passwd = self.password)
 
             print(f"Connected successfully!\n")
 
             self.connected = True
         
-        except ftplib.error_reply:
+        # Handle errors
+        except ftp.error_reply:
             print("Unexpected reply received from the server.")
 
-        except ftplib.error_temp:
+        except ftp.error_temp:
             print("Error code signifying a temporary error was received.")
 
-        except ftplib.error_perm:
+        except ftp.error_perm:
             print("Error code signifying a permanent error was received.")
 
-        except ftplib.error_proto:
+        except ftp.error_proto:
             print("Reply was received from the server that does not fit the response specifications of the File Transfer Protocol")
+
+        # Connecting failed?
+        if self.server == None:
+            print("Connection attempt failed. Closing program.")
+
+            time.sleep(3)
+
+            exit()
 
     def download(self):
         file_names = self.server.nlst()
@@ -58,6 +69,7 @@ class DownloadPlugins:
                 download_progress = (file_number / len(file_names)) * 100.0
 
             os.system("cls")
+
             print("Downloading: [%0.1f %%] [%i / %i] [%s]" %(download_progress, file_number, len(file_names), name))
 
             with open(name, "wb") as file:
