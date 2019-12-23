@@ -28,30 +28,34 @@ class ProcessPlugin:
 
         self.occurences = {}
         line_number = 0
+        files = [file for file in os.listdir(self.path) if os.path.isfile(os.path.join(self.path, file))]
 
         # Open file
-        with open(self.path) as file:
-            # Read it line by line
-            for line in file:
-                line_number += 1
+        for file_name in files:
+            full_path = self.config.files_path + file_name
 
-                # Skip the line if theres noting on it
-                if not len(line):
-                    continue
+            with open(full_path) as file:
+                # Read it line by line
+                for line in file:
+                    line_number += 1
 
-                # Look for every substring in the line
-                for substring in self.substrings:
-                    if not substring in line:
+                    # Skip the line if theres noting on it
+                    if not len(line):
                         continue
 
-                    try:
-                        found_data = self.occurences[substring]
-                        found_data.append(line_number)
+                    # Look for every substring in the line
+                    for substring in self.substrings:
+                        if not substring in line:
+                            continue
 
-                        self.occurences[substring] = found_data
+                        try:
+                            found_data = self.occurences[substring]
+                            found_data.append([line_number, file_name])
 
-                    except KeyError:
-                        self.occurences[substring] = [line_number]
+                            self.occurences[substring] = found_data
+
+                        except KeyError:
+                            self.occurences[substring] = [[line_number, file_name]]
 
         print("Processed successfully\n")
 
@@ -64,5 +68,5 @@ class ProcessPlugin:
         for substring in self.occurences.keys():
             print(f"Results for substring \"{substring}\":")
 
-            for line in self.occurences[substring]:
-                print(f"Line {line}")
+            for line, file in self.occurences[substring]:
+                print(f"\tLine {line} in {file}")
