@@ -17,17 +17,13 @@ class DownloadPlugins:
 	def connect(self):
 		""" Connects to FTP """
 		print("------ Connecting ------")
-		print(f"Connecting to server:\
-				\n\tHost: {self.host}\
-				\n\tUser: {self.user}\
-				\n\tPassword: {self.password}")
 
 		self.connected = False
 
 		try:
 			self.server = FTP(self.host, user = self.user, passwd = self.password)
 
-			print(f"Connected successfully!")
+			print(f"Connected successfully!\n")
 
 			self.connected = True
 		

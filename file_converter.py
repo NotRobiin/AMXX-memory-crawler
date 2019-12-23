@@ -22,3 +22,5 @@ class ConvertPlugins:
 
 			print(f"Executing command {command}")
 			os.system(command)
+
+		print("Converted successfully\n")

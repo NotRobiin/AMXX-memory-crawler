@@ -53,6 +53,8 @@ class ProcessPlugin:
 					except KeyError:
 						self.occurences[substring] = [line_number]
 
+		print("Processed successfully\n")
+
 	def print_results(self):
 		""" Prints found results if there are any. """
 		if not len(self.occurences):
