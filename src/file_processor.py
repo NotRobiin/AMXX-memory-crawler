@@ -54,7 +54,7 @@ class ProcessPlugin:
                     if not len(line):
                         continue
 
-                    # Look for every substring in the line
+                    # Look for every searched keyword in the line
                     for search_key in self.substrings:
                         if not search_key in line:
                             continue
@@ -75,7 +75,7 @@ class ProcessPlugin:
         if not len(self.occurences):
             print("No results were found.")
 
-        # Print found results for every searched substring
+        # Print found results for every searched key word
         for search_key in self.occurences.keys():
             print(f"Results for substring \"{search_key}\":")
 
