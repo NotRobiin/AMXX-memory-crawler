@@ -37,14 +37,14 @@ class DownloadPlugins:
             print("Error code signifying a permanent error was received.")
 
         except ftplib.error_proto:
-            print("Reply wass received from the server that does not fit the response specifications of the File Transfer Protocol")
+            print("Reply was received from the server that does not fit the response specifications of the File Transfer Protocol")
 
     def download(self):
         file_names = self.server.nlst()
         download_path = self.config.plugins_download_path
         original_path = self.config.files_path
-        download_percent = 0.0
-        file_index = 0
+        download_progress = 0.0
+        file_number = 0
 
         if not os.path.exists(download_path):
             os.mkdir(download_path)
@@ -52,13 +52,13 @@ class DownloadPlugins:
         os.chdir(download_path)
 
         for name in file_names:
-            file_index += 1
+            file_number += 1
             
             if len(file_names):
-                download_percent = (file_index / len(file_names)) * 100.0
+                download_progress = (file_number / len(file_names)) * 100.0
 
             os.system("cls")
-            print("Downloading: [%0.1f %%] [%i / %i] [%s]" %(download_percent, file_index, len(file_names), name))
+            print("Downloading: [%0.1f %%] [%i / %i] [%s]" %(download_progress, file_number, len(file_names), name))
 
             with open(name, "wb") as file:
                 self.server.retrbinary(f"RETR {name}", file.write)
