@@ -18,7 +18,19 @@ class DownloadPlugins:
 				\n\tHost: {self.host}\
 				\n\tUser: {self.user}\
 				\n\tPassword: {self.password}")
+		try:
+			self.server = FTP(self.host, user = self.user, passwd = self.password)
 
-		self.server = FTP(self.host, user = self.user, passwd = self.password)
+			print(f"Connected successfully!")
+		
+		except ftplib.error_reply:
+			print("Unexpected reply received from the server.")
 
-		print(f"Connected successfully!")
+		except ftplib.error_temp:
+			print("Error code signifying a temporary error was received.")
+
+		except ftplib.error_perm:
+			print("Error code signifying a permanent error was received.")
+
+		except ftplib.error_proto:
+			print("Reply wass received from the server that does not fit the response specifications of the File Transfer Protocol")
