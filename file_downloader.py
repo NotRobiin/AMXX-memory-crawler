@@ -1,4 +1,5 @@
 from ftplib import FTP
+import os
 
 class DownloadPlugins:
 	def __init__(self, config):
@@ -44,10 +45,18 @@ class DownloadPlugins:
 
 	def download(self):
 		file_names = self.server.nlst()
+		download_path = self.config.plugins_download_path
+		original_path = self.config.files_path
+
+		if not os.path.exists(download_path):
+			os.mkdir(download_path)
+
+		os.chdir(download_path)
 
 		for name in file_names:
 			with open(name, "wb") as file:
-				print(f"Opening file {name}")
 				self.server.retrbinary(f"RETR {name}", file.write)
 
 				file.close()
+
+		os.chdir(original_path)
