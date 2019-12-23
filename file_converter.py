@@ -19,8 +19,6 @@ class ConvertPlugins:
 
 		for file in self.paths:
 			command = f"cmd /c {self.config.uncompresser_path} {file}"
-
-			print(f"Executing command {command}")
 			os.system(command)
 
 		print("Converted successfully\n")
