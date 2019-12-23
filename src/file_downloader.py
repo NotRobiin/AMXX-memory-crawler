@@ -57,24 +57,31 @@ class DownloadPlugins:
         download_progress = 0.0
         file_number = 0
 
+        # Make sure output directory exists
         if not os.path.exists(download_path):
             os.mkdir(download_path)
 
+        # Switch to output directory for downloading purposes
         os.chdir(download_path)
 
         for name in file_names:
             file_number += 1
             
+            # Calculate download progress
             if len(file_names):
                 download_progress = (file_number / len(file_names)) * 100.0
 
+            # Clear the console
             os.system("cls")
 
+            # Display downloading progress
             print("Downloading: [%0.1f %%] [%i / %i] [%s]" %(download_progress, file_number, len(file_names), name))
 
+            # Actually download the file
             with open(name, "wb") as file:
                 self.server.retrbinary(f"RETR {name}", file.write)
 
                 file.close()
 
+        # Switch back to original path
         os.chdir(original_path)
