@@ -1,7 +1,7 @@
-from config import Config
-from file_processor import ProcessPlugin
-from file_downloader import DownloadPlugins
-from file_converter import ConvertPlugins
+from config.config import Config
+from src.file_processor import ProcessPlugin
+from src.file_downloader import DownloadPlugins
+from src.file_converter import ConvertPlugins
 
 if __name__ == "__main__":
 	config = Config()
